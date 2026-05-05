@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'home_page.dart';
 import 'chats_page.dart';
 import 'idea_page.dart';
@@ -53,52 +52,29 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
-      surfaceTintColor: Colors.white,
-      leading: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF800000),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: const Center(
-            child: Text(
-              'HI',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
+      leading: IconButton(
+        icon: const Icon(LucideIcons.menu, color: Colors.black54),
+        onPressed: () {},
       ),
-      title: Text(
-        'HITIAN INSIDE',
-        style: GoogleFonts.outfit(
+      title: const Text(
+        'HITian Inside',
+        style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: const Color(0xFF800000),
-          fontSize: 22,
-          letterSpacing: -0.5,
+          color: Color(0xFF800000),
+          fontSize: 20,
         ),
       ),
       actions: [
         IconButton(
-          icon: const Icon(LucideIcons.search, color: Color(0xFF495057)),
+          icon: const Icon(LucideIcons.bell, color: Colors.black54),
           onPressed: () {},
         ),
         Padding(
           padding: const EdgeInsets.only(right: 16.0),
-          child: Container(
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.black12),
-            ),
-            child: const CircleAvatar(
-              radius: 18,
-              backgroundImage: NetworkImage('https://i.pravatar.cc/150?u=hitian'), // Placeholder for profile pic
-            ),
+          child: CircleAvatar(
+            radius: 18,
+            backgroundColor: Colors.grey[200],
+            child: const Icon(LucideIcons.user, size: 20, color: Colors.black54),
           ),
         ),
       ],
@@ -124,12 +100,10 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 20,
-            offset: const Offset(0, -5),
+            blurRadius: 10,
           ),
         ],
       ),
@@ -138,27 +112,16 @@ class CustomBottomNavBar extends StatelessWidget {
         onTap: onTap,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        elevation: 0,
         selectedItemColor: const Color(0xFF800000),
-        unselectedItemColor: const Color(0xFFADB5BD),
-        selectedLabelStyle: GoogleFonts.outfit(fontWeight: FontWeight.bold, fontSize: 10, letterSpacing: 0.5),
-        unselectedLabelStyle: GoogleFonts.outfit(fontSize: 10, letterSpacing: 0.5),
-        items: [
-          const BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: 'HOME'),
-          const BottomNavigationBarItem(icon: Icon(LucideIcons.messageCircle), label: 'CHAT'),
-          BottomNavigationBarItem(
-            icon: Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: currentIndex == 2 ? const Color(0xFF800000).withValues(alpha: 0.05) : Colors.transparent,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(LucideIcons.lightbulb),
-            ),
-            label: 'IDEAS',
-          ),
-          const BottomNavigationBarItem(icon: Icon(LucideIcons.calendar), label: 'EVENTS'),
-          const BottomNavigationBarItem(icon: Icon(LucideIcons.user), label: 'PROFILE'),
+        unselectedItemColor: Colors.black38,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+        unselectedLabelStyle: const TextStyle(fontSize: 12),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(LucideIcons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.messageSquare), label: 'Chats'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.compass), label: 'Idea'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.calendar), label: 'Event'),
+          BottomNavigationBarItem(icon: Icon(LucideIcons.user), label: 'Profile'),
         ],
       ),
     );
