@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'chat_detail_page.dart';
 
 class ChatsPage extends StatelessWidget {
   const ChatsPage({super.key});
@@ -102,7 +103,16 @@ class ChatsPage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  // Navigate to chat detail
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChatDetailPage(
+                        groupName: group.name,
+                        groupType: group.type,
+                        icon: group.icon,
+                      ),
+                    ),
+                  );
                 },
               );
             },
