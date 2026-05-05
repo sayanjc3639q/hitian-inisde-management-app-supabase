@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'theme.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -7,199 +9,34 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(20.0),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 1. Greeting and Domain
-          _buildGreetingSection(context),
-          const SizedBox(height: 24),
-
-          // 2. Announcements
-          _buildSectionHeader(context, 'Announcements', onSeeAll: () {}),
-          const SizedBox(height: 12),
-          _buildAnnouncementCard(context),
-          const SizedBox(height: 24),
-
-          // 3. Stats (Task Count, Events Participated)
-          Row(
-            children: [
-              Expanded(
-                child: _buildStatCard(
-                  context,
-                  'Task Count',
-                  '--', // Placeholder for data
-                  LucideIcons.checkSquare,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _buildStatCard(
-                  context,
-                  'Events Participated',
-                  '--', // Placeholder for data
-                  LucideIcons.users,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
-
-          // 4. My Tasks
-          _buildSectionHeader(context, 'My Tasks', onSeeAll: () {}),
-          const SizedBox(height: 12),
-          _buildTaskList(context),
-          const SizedBox(height: 24),
-
-          // 5. Navigation Links
-          _buildNavLink(context, 'See all members', LucideIcons.userPlus),
-          _buildNavLink(
-            context,
-            'Guidelines of HITian Inside',
-            LucideIcons.bookOpen,
-          ),
-          _buildNavLink(
-            context,
-            'See Founders and Alumni',
-            LucideIcons.graduationCap,
-          ),
-
-          const SizedBox(height: 40),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildGreetingSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Hello, [First Name]', // Placeholder
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          '[Domain Name]', // Placeholder (e.g. Web/App Developer)
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Colors.grey[600],
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSectionHeader(
-    BuildContext context,
-    String title, {
-    VoidCallback? onSeeAll,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: Theme.of(
-            context,
-          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        ),
-        if (onSeeAll != null)
-          TextButton(onPressed: onSeeAll, child: const Text('See all')),
-      ],
-    );
-  }
-
-  Widget _buildAnnouncementCard(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
-        ),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'No recent announcements', // Placeholder
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 4),
-          Text(
-            'Stay tuned for updates from the Maroon Squad.',
-            style: TextStyle(fontSize: 12, color: Colors.black54),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatCard(
-    BuildContext context,
-    String title,
-    String value,
-    IconData icon,
-  ) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: Theme.of(context).colorScheme.primary, size: 24),
-          const SizedBox(height: 12),
-          Text(
-            value,
-            style: Theme.of(
-              context,
-            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 4),
-          Text(title, style: const TextStyle(fontSize: 12, color: Colors.grey)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTaskList(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          _buildTaskItem(context, 'No tasks assigned', false), // Placeholder
-          const Divider(height: 1),
+          _buildPremiumHeader(context),
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-              onPressed: () {},
-              child: const Text('See details'),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 32),
+                _buildSectionHeader(context, 'Organization Pulse', onSeeAll: () {}),
+                const SizedBox(height: 16),
+                _buildStatsGrid(context),
+                const SizedBox(height: 32),
+                _buildSectionHeader(context, 'Latest Announcements', onSeeAll: () {}),
+                const SizedBox(height: 16),
+                _buildAnnouncementsCarousel(context),
+                const SizedBox(height: 32),
+                _buildSectionHeader(context, 'My Priorities', onSeeAll: () {}),
+                const SizedBox(height: 16),
+                _buildTaskDashboard(context),
+                const SizedBox(height: 32),
+                _buildSectionHeader(context, 'Quick Exploration', onSeeAll: null),
+                const SizedBox(height: 16),
+                _buildQuickExploreLinks(context),
+                const SizedBox(height: 40),
+              ],
             ),
           ),
         ],
@@ -207,53 +44,424 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskItem(BuildContext context, String title, bool isCompleted) {
-    return ListTile(
-      leading: Icon(
-        isCompleted ? LucideIcons.checkCircle : LucideIcons.circle,
-        color: isCompleted ? Colors.green : Colors.grey,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: isCompleted ? Colors.grey : Colors.black,
-          decoration: isCompleted ? TextDecoration.lineThrough : null,
+  Widget _buildPremiumHeader(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: AppTheme.maroon,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+        ),
+        gradient: LinearGradient(
+          colors: [AppTheme.darkMaroon, AppTheme.maroon],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
       ),
-    );
-  }
-
-  Widget _buildNavLink(BuildContext context, String title, IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: InkWell(
-        onTap: () {},
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Row(
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 20, 24, 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                icon,
-                color: Theme.of(context).colorScheme.primary,
-                size: 20,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Good Morning,',
+                        style: GoogleFonts.outfit(
+                          color: Colors.white.withValues(alpha: 0.7),
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        'Sayan J.', // Placeholder
+                        style: GoogleFonts.outfit(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.15),
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.all(10),
+                    child: const Icon(LucideIcons.bell, color: Colors.white, size: 24),
+                  ),
+                ],
               ),
-              const SizedBox(width: 16),
-              Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
-              const Spacer(),
-              const Icon(
-                LucideIcons.chevronRight,
-                size: 16,
-                color: Colors.grey,
+              const SizedBox(height: 30),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundColor: AppTheme.cream,
+                      child: Icon(LucideIcons.code, color: AppTheme.maroon, size: 24),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Active Domain',
+                            style: GoogleFonts.outfit(
+                              color: Colors.white.withValues(alpha: 0.6),
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            'Web/App Developer', // Placeholder
+                            style: GoogleFonts.outfit(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: AppTheme.cream.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Text(
+                        'CORE',
+                        style: GoogleFonts.outfit(
+                          color: AppTheme.cream,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSectionHeader(BuildContext context, String title, {VoidCallback? onSeeAll}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.outfit(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+        if (onSeeAll != null)
+          TextButton(
+            onPressed: onSeeAll,
+            child: Text(
+              'See All',
+              style: GoogleFonts.outfit(
+                color: AppTheme.maroon,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildStatsGrid(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: _buildStatItem(
+            context,
+            'Total Tasks',
+            '12',
+            LucideIcons.checkCircle2,
+            Colors.blue,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildStatItem(
+            context,
+            'Events',
+            '05',
+            LucideIcons.calendar,
+            Colors.orange,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: _buildStatItem(
+            context,
+            'Contribution',
+            '2.4k',
+            LucideIcons.trendingUp,
+            Colors.green,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatItem(BuildContext context, String title, String value, IconData icon, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 20),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            value,
+            style: GoogleFonts.outfit(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            title,
+            style: GoogleFonts.outfit(
+              fontSize: 11,
+              color: Colors.grey[500],
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAnnouncementsCarousel(BuildContext context) {
+    return SizedBox(
+      height: 160,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
+        itemCount: 3,
+        separatorBuilder: (context, index) => const SizedBox(width: 16),
+        itemBuilder: (context, index) {
+          final colors = [AppTheme.maroon, Colors.blue[800]!, Colors.purple[800]!];
+          final titles = ['Annual Meetup 2024', 'New Design Guidelines', 'Tech Stack Update'];
+          return Container(
+            width: 280,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              gradient: LinearGradient(
+                colors: [colors[index], colors[index].withValues(alpha: 0.8)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: colors[index].withValues(alpha: 0.3),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(LucideIcons.megaphone, color: Colors.white.withValues(alpha: 0.9), size: 24),
+                    Text(
+                      'URGENT',
+                      style: GoogleFonts.outfit(color: Colors.white.withValues(alpha: 0.7), fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      titles[index],
+                      style: GoogleFonts.outfit(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Tap to read the details of this announcement...',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.outfit(color: Colors.white.withValues(alpha: 0.7), fontSize: 12),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildTaskDashboard(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          _buildTaskListItem('Fix bug in Navigation', 'High', true),
+          const Divider(height: 1, indent: 20, endIndent: 20),
+          _buildTaskListItem('Update User Profiles', 'Medium', false),
+          const Divider(height: 1, indent: 20, endIndent: 20),
+          _buildTaskListItem('Prepare Meeting Agenda', 'Low', false),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextButton(
+              onPressed: () {},
+              child: Text(
+                'VIEW ALL TASKS',
+                style: GoogleFonts.outfit(color: AppTheme.maroon, fontWeight: FontWeight.bold, letterSpacing: 0.5),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTaskListItem(String title, String priority, bool isCompleted) {
+    Color priorityColor = Colors.green;
+    if (priority == 'High') priorityColor = Colors.red;
+    if (priority == 'Medium') priorityColor = Colors.orange;
+
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      leading: Container(
+        decoration: BoxDecoration(
+          color: isCompleted ? Colors.green.withValues(alpha: 0.1) : Colors.grey[100],
+          shape: BoxShape.circle,
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Icon(
+          isCompleted ? LucideIcons.check : LucideIcons.clock,
+          color: isCompleted ? Colors.green : Colors.grey[400],
+          size: 18,
+        ),
+      ),
+      title: Text(
+        title,
+        style: GoogleFonts.outfit(
+          fontSize: 15,
+          fontWeight: FontWeight.w600,
+          decoration: isCompleted ? TextDecoration.lineThrough : null,
+          color: isCompleted ? Colors.grey : Colors.black87,
+        ),
+      ),
+      subtitle: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: priorityColor, shape: BoxShape.circle),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            priority,
+            style: GoogleFonts.outfit(fontSize: 12, color: Colors.grey[600]),
+          ),
+        ],
+      ),
+      trailing: const Icon(LucideIcons.chevronRight, size: 16, color: Colors.grey),
+    );
+  }
+
+  Widget _buildQuickExploreLinks(BuildContext context) {
+    final links = [
+      {'title': 'All Members', 'icon': LucideIcons.userPlus, 'color': Colors.blue},
+      {'title': 'Guidelines', 'icon': LucideIcons.bookOpen, 'color': Colors.teal},
+      {'title': 'Founders', 'icon': LucideIcons.graduationCap, 'color': Colors.indigo},
+    ];
+
+    return Column(
+      children: links.map((link) => Padding(
+        padding: const EdgeInsets.only(bottom: 12.0),
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.grey[100]!),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: (link['color'] as Color).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(link['icon'] as IconData, color: link['color'] as Color, size: 20),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  link['title'] as String,
+                  style: GoogleFonts.outfit(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.black87),
+                ),
+                const Spacer(),
+                const Icon(LucideIcons.arrowRight, size: 18, color: Colors.grey),
+              ],
+            ),
+          ),
+        ),
+      )).toList(),
     );
   }
 }

@@ -74,7 +74,7 @@ class _IdeaPageState extends State<IdeaPage> {
                 opacity: _showBackToTop ? 1.0 : 0.0,
                 child: FloatingActionButton.small(
                   onPressed: _scrollToTop,
-                  backgroundColor: AppTheme.maroon.withOpacity(0.9),
+                  backgroundColor: AppTheme.maroon.withValues(alpha: 0.9),
                   child: const Icon(LucideIcons.chevronUp, color: Colors.white),
                 ),
               ),
@@ -139,7 +139,7 @@ class _IdeaPageState extends State<IdeaPage> {
               child: Text(
                 'Pitch your vision for\nthe Maroon Squad.',
                 style: GoogleFonts.outfit(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                   fontSize: 16,
                   height: 1.2,
                 ),
@@ -172,7 +172,7 @@ class _IdeaPageState extends State<IdeaPage> {
                             color: _selectedCategory == cat ? AppTheme.maroon : Colors.grey[100],
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: _selectedCategory == cat
-                                ? [BoxShadow(color: AppTheme.maroon.withOpacity(0.3), blurRadius: 8, offset: const Offset(0, 4))]
+                                ? [BoxShadow(color: AppTheme.maroon.withValues(alpha: 0.3), blurRadius: 8, offset: const Offset(0, 4))]
                                 : null,
                           ),
                           child: Text(
@@ -270,7 +270,7 @@ class _IdeaPageState extends State<IdeaPage> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -294,7 +294,7 @@ class _IdeaPageState extends State<IdeaPage> {
                         children: [
                           CircleAvatar(
                             radius: 14,
-                            backgroundColor: AppTheme.maroon.withOpacity(0.1),
+                            backgroundColor: AppTheme.maroon.withValues(alpha: 0.1),
                             child: Text(
                               idea.author[0],
                               style: GoogleFonts.outfit(color: AppTheme.maroon, fontSize: 10, fontWeight: FontWeight.bold),
@@ -354,7 +354,7 @@ class _IdeaPageState extends State<IdeaPage> {
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
-                          color: _getCategoryColor(idea.category).withOpacity(0.1),
+                          color: _getCategoryColor(idea.category).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -396,7 +396,7 @@ class _IdeaPageState extends State<IdeaPage> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
