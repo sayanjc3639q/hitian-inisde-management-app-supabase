@@ -135,6 +135,7 @@ class _IdeaPageState extends State<IdeaPage> {
             ),
             Positioned(
               left: 20,
+              right: 20,
               bottom: 60,
               child: Text(
                 'Pitch your vision for\nthe Maroon Squad.',
@@ -290,27 +291,33 @@ class _IdeaPageState extends State<IdeaPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 14,
-                            backgroundColor: AppTheme.maroon.withValues(alpha: 0.1),
-                            child: Text(
-                              idea.author[0],
-                              style: GoogleFonts.outfit(color: AppTheme.maroon, fontSize: 10, fontWeight: FontWeight.bold),
+                      Flexible(
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(color: AppTheme.maroon.withValues(alpha: 0.1), shape: BoxShape.circle),
+                              child: Text(
+                                idea.author.substring(0, 1).toUpperCase(),
+                                style: GoogleFonts.outfit(color: AppTheme.maroon, fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            idea.author,
-                            style: GoogleFonts.outfit(color: Colors.grey[800], fontSize: 13, fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            ' • ${idea.time}',
-                            style: GoogleFonts.outfit(color: Colors.grey[400], fontSize: 11),
-                          ),
-                        ],
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: Text(
+                                idea.author,
+                                style: GoogleFonts.outfit(color: Colors.grey[800], fontSize: 13, fontWeight: FontWeight.w600),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Text(
+                              ' • ${idea.time}',
+                              style: GoogleFonts.outfit(color: Colors.grey[400], fontSize: 11),
+                            ),
+                          ],
+                        ),
                       ),
+                      const SizedBox(width: 8),
                       _buildStatusBadge(idea),
                     ],
                   ),
@@ -549,15 +556,18 @@ class _StickyFilterDelegate extends SliverPersistentHeaderDelegate {
   _StickyFilterDelegate({required this.child});
 
   @override
-  double get minExtent => 110.0;
+  double get minExtent => 125.0;
   @override
-  double get maxExtent => 110.0;
+  double get maxExtent => 125.0;
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: Colors.white,
-      child: child,
+      child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: child,
+      ),
     );
   }
 
